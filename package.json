@@ -1,0 +1,14 @@
+{
+  "name": "blog-project-refactoring",
+  "version": "1.0.0",
+  "description": "This is the blog-project based on nextjs for refactoring.",
+  "main": "index.js",
+  "author": "lsevina126 <lsevina126@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^8.0.3"
+  },
+  "scripts": {
+    "prepare": "npx husky install"
+  }
+}
