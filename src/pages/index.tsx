@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   const [testArr, setTestArr] = useState<Array<number | string>>([1, 2, 3, 4, 5]);
 
-  var varTest = 'varTest';
+  let varTest = 'varTest';
 
   useEffect(() => {
     varTest = 'letTest';
