@@ -7,6 +7,7 @@ export default function Home() {
   var varTest = 'varTest';
 
   useEffect(() => {
+    varTest = 'letTest';
     setTestArr([...testArr, varTest]);
   }, []);
 

@@ -21,14 +21,14 @@
   "plugins": ["@typescript-eslint"],
   "settings": {
     "next": {
-      "rootDir": "packages/*/"
+      "rootDir": "src/*/"
     }
   },
   "env": {
     "es6": true,
     "node": true
   },
-  "ignorePatterns": ["dist", "node_modules", "examples", "scripts", "packages/common/redux/endpoints"],
+  "ignorePatterns": ["dist", "node_modules", "examples", "scripts", "src/common/redux/endpoints"],
   "rules": {
     "no-param-reassign": ["error", { "props": false }],
     "@typescript-eslint/no-unused-vars": "error",
@@ -91,8 +91,5 @@
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": 0
-  },
-  "globals": {
-    "React": "writable"
   }
 }
