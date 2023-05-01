@@ -1,14 +1,12 @@
 {
   "workbench.colorTheme": "Material Theme Darker High Contrast",
   "workbench.iconTheme": "material-icon-theme",
-  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[svg]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
@@ -100,17 +98,5 @@
     "comments": "on",
     "strings": "on"
   },
-  "editor.suggest.showSnippets": true,
-  "emmet.triggerExpansionOnTab": true,
-  "autoimport.filesToScan": "**/*.{ts,tsx,js,jsx}",
-  "git.openRepositoryInParentFolders": "never",
-
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": false,
-  "editor.formatOnType": false,
-  "editor.formatOnSaveMode": "file",
-  "files.autoSave": "onFocusChange",
-  "vs-code-prettier-eslint.prettierLast": false,
-
-  "eslint.alwaysShowStatus": true
+  "editor.suggest.showSnippets": true
 }
