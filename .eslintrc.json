@@ -45,6 +45,7 @@
     ],
     "react/jsx-props-no-spreading": "off",
     // Best practices
+    "no-var": "error",
     "dot-notation": "error",
     "no-else-return": "error",
     "no-floating-decimal": "off",
