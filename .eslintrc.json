@@ -28,26 +28,14 @@
     "es6": true,
     "node": true
   },
-  "ignorePatterns": [
-    "dist",
-    "node_modules",
-    "examples",
-    "scripts",
-    "packages/common/redux/endpoints"
-  ],
+  "ignorePatterns": ["dist", "node_modules", "examples", "scripts", "packages/common/redux/endpoints"],
   "rules": {
     "no-param-reassign": ["error", { "props": false }],
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
     // Possible errors
-    "max-lines-per-function": [
-      "error",
-      { "max": 200, "skipBlankLines": true, "skipComments": true }
-    ],
-    "max-lines": [
-      "error",
-      { "max": 300, "skipBlankLines": true, "skipComments": true }
-    ],
+    "max-lines-per-function": ["error", { "max": 200, "skipBlankLines": true, "skipComments": true }],
+    "max-lines": ["error", { "max": 300, "skipBlankLines": true, "skipComments": true }],
     "no-console": "error",
     "react/function-component-definition": [
       "error",
@@ -59,23 +47,16 @@
     // Best practices
     "dot-notation": "error",
     "no-else-return": "error",
-    "no-floating-decimal": "error",
+    "no-floating-decimal": "off",
     "no-sequences": "error",
     // Stylistic
-    "array-bracket-spacing": "error",
-    "computed-property-spacing": ["error", "never"],
-    "curly": "error",
+    "array-bracket-spacing": "off",
+    "computed-property-spacing": "off",
+    "curly": "off",
     "no-lonely-if": "error",
     "no-unneeded-ternary": "error",
-    "one-var-declaration-per-line": "error",
-    "quotes": [
-      "error",
-      "single",
-      {
-        "allowTemplateLiterals": false,
-        "avoidEscape": true
-      }
-    ],
+    "one-var-declaration-per-line": "off",
+    "quotes": "off",
     // ES6
     "array-callback-return": "off",
     "prefer-const": "error",

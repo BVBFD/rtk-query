@@ -1,28 +1,32 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const [testArr, setTestArr] = useState<any>([1, 2, 3, 4, 5]);
+  const [testArr, setTestArr] = useState<Array<number | string>>([1, 2, 3, 4, 5]);
 
-  // Test if npm husky works or not
+  let varTest = 'varTest';
+
+  useEffect(() => {
+    setTestArr([...testArr, varTest]);
+  }, []);
 
   return (
     <>
       <Head>
         {/* SEO */}
         <title>Blog Project Refactor</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Blog Project with React and NodeJS" />
-        <meta property="og:title" content="Blog Project with React and NodeJS" />
-        <meta property="og:url" content="https://lsevina126.netlify.app" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Blog Project for lsevina126" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta content="Blog Project with React and NodeJS" name="description" />
+        <meta content="Blog Project with React and NodeJS" property="og:title" />
+        <meta content="https://lsevina126.netlify.app" property="og:url" />
+        <meta content="website" property="og:type" />
+        <meta content="Blog Project for lsevina126" property="og:site_name" />
         <meta
-          property="og:image"
           content="https://res.cloudinary.com/dewa3t2gi/image/upload/v1674981291/qyeb9rvghfair1pkgqud.png"
+          property="og:image"
         />
-        <meta property="og:description" content="Blog Project for lsevina126 with React and NodeJS" />
-        <link rel="canonical" href="https://lsevina126.netlify.app" />
+        <meta content="Blog Project for lsevina126 with React and NodeJS" property="og:description" />
+        <link href="https://lsevina126.netlify.app" rel="canonical" />
         {/* SEO */}
       </Head>
       <header>Blog Project Refactor</header>
