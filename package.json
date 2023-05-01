@@ -8,9 +8,8 @@
     "start": "next start",
     "lint:fix": "eslint --fix ./src/**/*.{js,jsx,ts,tsx}",
     "prettier:fix": "npx eslint-config-prettier ./src/**/*.{js,jsx,ts,tsx}",
-    "check-conflict-formatting-rules": "npx eslint-config-prettier ./src/**/*.{js,jsx,ts,tsx}",
     "prepare": "husky install",
-    "test": "npm run check-conflict-formatting-rules && npm run prettier:fix && npm run lint:fix"
+    "test": "npm run prettier:fix && npm run lint:fix"
   },
   "dependencies": {
     "@types/node": "18.16.3",
@@ -44,7 +43,6 @@
   },
   "lint-staged": {
     "./src/**/*.{js,jsx,ts,tsx}": [
-      "npm run check-conflict-formatting-rules",
       "npm run prettier:fix",
       "npm run lint:fix"
     ]
