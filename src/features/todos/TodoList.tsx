@@ -29,7 +29,12 @@ const TodoList = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    addTodo({ userId: 1, title: newTodo, completed: false });
+    addTodo({
+      userId: 1,
+      title: newTodo,
+      completed: false,
+      id: 0,
+    });
     setNewTodo('');
   };
 

@@ -1,9 +1,12 @@
 import {
+  BaseQueryFn,
   FetchBaseQueryError,
   FetchBaseQueryMeta,
   createApi,
-  fetchBaseQuery,
+  // fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import type { BaseQueryApi } from '@reduxjs/toolkit/query/react';
 
 interface TodosType {
   userId: number;
@@ -17,6 +20,44 @@ interface ErrorType {
   error?: string;
   data: string | React.ReactNode;
 }
+
+const axiosBaseQuery =
+  (
+    { baseUrl }: { baseUrl: string } = { baseUrl: '' }
+  ): BaseQueryFn<
+    {
+      url: string;
+      method?: AxiosRequestConfig['method'];
+      body?: AxiosRequestConfig['data'];
+      params?: AxiosRequestConfig['params'];
+    },
+    BaseQueryApi | Array<TodosType>,
+    unknown
+  > =>
+  async ({ url, method, body, params }, { getState }) => {
+    try {
+      const store = getState() as any;
+      // any is RootState in Redux Tookit Store Type
+      const result = await axios({
+        url: baseUrl + url,
+        method: method ?? 'GET',
+        data: body,
+        params,
+        headers: {
+          Authorization: `Bearer ${store?.auth?.accessToken}`,
+        },
+      });
+      return { data: result.data };
+    } catch (axiosError) {
+      const err = axiosError as AxiosError;
+      return {
+        error: {
+          status: err.response?.status ?? null,
+          data: err.response?.data || err.message,
+        },
+      };
+    }
+  };
 
 const transformErrorResponseCallback = (
   baseQueryReturnValue: FetchBaseQueryError,
@@ -35,22 +76,21 @@ const transformErrorResponseCallback = (
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:8080',
-  }),
+  baseQuery: axiosBaseQuery({ baseUrl: 'http://localhost:8080' }),
   tagTypes: ['Todos'],
   endpoints: (builder) => ({
     // 여기서 TodosType[] Response 결과값에 대한 타입임.
-    // void는 API 요청 콜백함수 요청 인자에 대한 타입임.
+    // void는 API 요청 콜백함수 요청 인자(Parameter)에 대한 타입임.
     getTodos: builder.query<TodosType[], void>({
-      query: () => '/todos',
-      transformResponse: (res: Array<TodosType>) =>
-        res.sort((a, b) => b.id - a.id),
+      query: () => ({ url: '/todos' }),
+      transformResponse: (res: Array<TodosType>) => {
+        return res.sort((a, b) => b.id - a.id);
+      },
       providesTags: ['Todos'],
       transformErrorResponse: transformErrorResponseCallback,
     }),
 
-    addTodo: builder.mutation({
+    addTodo: builder.mutation<TodosType, TodosType>({
       query: (todo) => ({
         url: '/todos',
         method: 'POST',
@@ -60,7 +100,7 @@ export const apiSlice = createApi({
       transformErrorResponse: transformErrorResponseCallback,
     }),
 
-    updateTodo: builder.mutation({
+    updateTodo: builder.mutation<TodosType, TodosType>({
       query: (todo: TodosType) => ({
         url: `/todos/${todo.id}`,
         method: 'PATCH',
@@ -70,7 +110,7 @@ export const apiSlice = createApi({
       transformErrorResponse: transformErrorResponseCallback,
     }),
 
-    deleteTodo: builder.mutation({
+    deleteTodo: builder.mutation<TodosType, { id: number }>({
       query: ({ id }) => ({
         url: `/todos/${id}`,
         method: 'DELETE',
