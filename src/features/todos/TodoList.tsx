@@ -1,26 +1,54 @@
 import React, { useState } from 'react';
+import { useGetTodosQuery } from '../api/apiSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
 
 const TodoList = () => {
   const [newTodo, setNewTodo] = useState<string>('');
 
+  const {
+    data: todos,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetTodosQuery();
+
+  console.log(`todos: `, todos);
+  console.log(`isLoading: ${isLoading}`);
+  console.log(`isSuccess: ${isSuccess}`);
+  console.log(`isError: ${isError}`);
+  console.log(`error: ${error}`);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setNewTodo('');
   };
 
-  let content = (
-    <article>
-      <div className='todo'>
-        <input type='checkbox' />
-        <label>title</label>
-      </div>
-      <button className='trash'>
-        <FontAwesomeIcon icon={faTrash} />
-      </button>
-    </article>
-  );
+  let content;
+  if (isLoading) {
+    content = <p>Loading...</p>;
+  }
+
+  if (isSuccess) {
+    content = todos.map((todo) => {
+      return (
+        <article key={todo.id}>
+          <div className='todo'>
+            <input
+              type='checkbox'
+              checked={todo.completed}
+              id={String(todo.id)}
+            />
+            <label htmlFor={String(todo.id)}>{todo.title}</label>
+          </div>
+          <button className='trash'>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </article>
+      );
+    });
+  }
 
   const newItemSection = (
     <form onSubmit={handleSubmit}>
