@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
-import { useGetTodosQuery } from '../api/apiSlice';
+import {
+  useAddTodoMutation,
+  useDeleteTodoMutation,
+  useGetTodosQuery,
+  useUpdateTodoMutation,
+} from '../api/apiSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
 
+interface ErrorType {
+  status: number;
+  error?: string;
+  data: string;
+}
+
 const TodoList = () => {
   const [newTodo, setNewTodo] = useState<string>('');
-
   const {
     data: todos,
     isLoading,
@@ -13,15 +23,13 @@ const TodoList = () => {
     isError,
     error,
   } = useGetTodosQuery();
-
-  console.log(`todos: `, todos);
-  console.log(`isLoading: ${isLoading}`);
-  console.log(`isSuccess: ${isSuccess}`);
-  console.log(`isError: ${isError}`);
-  console.log(`error: ${error}`);
+  const [addTodo] = useAddTodoMutation();
+  const [updateTodo] = useUpdateTodoMutation();
+  const [deleteTodo] = useDeleteTodoMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    addTodo({ userId: 1, title: newTodo, completed: false });
     setNewTodo('');
   };
 
@@ -39,15 +47,22 @@ const TodoList = () => {
               type='checkbox'
               checked={todo.completed}
               id={String(todo.id)}
+              onChange={() =>
+                updateTodo({ ...todo, completed: !todo.completed })
+              }
             />
             <label htmlFor={String(todo.id)}>{todo.title}</label>
           </div>
-          <button className='trash'>
+          <button className='trash' onClick={() => deleteTodo({ id: todo.id })}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </article>
       );
     });
+  }
+
+  if (isError) {
+    content = <p>{(error as ErrorType).data}</p>;
   }
 
   const newItemSection = (
