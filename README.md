@@ -5,9 +5,3 @@
 ![RTK_Query](https://user-images.githubusercontent.com/83178592/235871255-755d6b01-6554-477d-bc33-ff9da5531c0c.jpg)
 
 <br/>
-
-https://github.com/gitdagray/react_redux_toolkit
-
-<br/>
-
-https://www.youtube.com/watch?v=HyZzCHgG3AY
