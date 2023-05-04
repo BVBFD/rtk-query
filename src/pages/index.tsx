@@ -11,6 +11,8 @@ export default function Home() {
     setTestArr([...testArr, varTest]);
   }, []);
 
+  // commit test in new config dev enviroment
+
   return (
     <>
       <Head>
