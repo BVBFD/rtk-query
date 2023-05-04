@@ -2,7 +2,7 @@
 
 <br/>
 
-Prettier, ES-Lint, Airbnb CSS Coding Conventions and Husky Pre-commits Hooks.
+Prettier, ES-Lint, Airbnb CSS Coding Conventions and Husky Pre-Commits Hooks.
 
 <br/>
 
