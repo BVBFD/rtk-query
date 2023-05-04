@@ -1,4 +1,4 @@
-# RTK-Query, Create-React-App and TypeScript
+# RTK-Query, Redux-Toolkits, Create-React-App and TypeScript
 
 <br/>
 
