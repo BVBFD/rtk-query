@@ -1,7 +1,5 @@
 import {
   BaseQueryFn,
-  FetchBaseQueryError,
-  FetchBaseQueryMeta,
   createApi,
   // fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
@@ -13,12 +11,6 @@ interface TodosType {
   id: number;
   title: string;
   completed: boolean;
-}
-
-interface ErrorType {
-  status: number;
-  error?: string;
-  data: string | React.ReactNode;
 }
 
 const axiosBaseQuery =
@@ -59,75 +51,12 @@ const axiosBaseQuery =
     }
   };
 
-const transformErrorResponseCallback = (
-  baseQueryReturnValue: FetchBaseQueryError,
-  meta: FetchBaseQueryMeta
-  // arg: any
-) => {
-  if (meta?.response) {
-    baseQueryReturnValue.status = meta?.response.status;
-    baseQueryReturnValue.data = meta?.response.statusText;
-  } else {
-    baseQueryReturnValue.status = 500;
-    baseQueryReturnValue.data = 'Not Connected!!';
-  }
-  return baseQueryReturnValue as ErrorType;
-};
-
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: axiosBaseQuery({ baseUrl: 'http://localhost:8080' }),
   tagTypes: ['Todos'],
-  endpoints: (builder) => ({
-    // 여기서 TodosType[] Response 결과값에 대한 타입임.
-    // void는 API 요청 콜백함수 요청 인자(Parameter)에 대한 타입임.
-    getTodos: builder.query<TodosType[], void>({
-      query: () => ({ url: '/todos' }),
-      transformResponse: (res: Array<TodosType>) => {
-        return res.sort((a, b) => b.id - a.id);
-      },
-      providesTags: ['Todos'],
-      transformErrorResponse: transformErrorResponseCallback,
-    }),
-
-    addTodo: builder.mutation<TodosType, TodosType>({
-      query: (todo) => ({
-        url: '/todos',
-        method: 'POST',
-        body: todo,
-      }),
-      invalidatesTags: ['Todos'],
-      transformErrorResponse: transformErrorResponseCallback,
-    }),
-
-    updateTodo: builder.mutation<TodosType, TodosType>({
-      query: (todo: TodosType) => ({
-        url: `/todos/${todo.id}`,
-        method: 'PATCH',
-        body: todo,
-      }),
-      invalidatesTags: ['Todos'],
-      transformErrorResponse: transformErrorResponseCallback,
-    }),
-
-    deleteTodo: builder.mutation<TodosType, { id: number }>({
-      query: ({ id }) => ({
-        url: `/todos/${id}`,
-        method: 'DELETE',
-        body: id,
-      }),
-      invalidatesTags: ['Todos'],
-      transformErrorResponse: transformErrorResponseCallback,
-    }),
-  }),
+  endpoints: () => ({}),
 });
-
-export const {
-  useGetTodosQuery,
-  useAddTodoMutation,
-  useUpdateTodoMutation,
-  useDeleteTodoMutation,
-} = apiSlice;
 
 // 하나의 서비스에서 사용할 모든 endPoint들의 tag 들을 tagTypes 배열에 전부다 등록을 하고,
 // 하나의 endpoints에서 get으로 데이터를 가지고 올때 providesTags를 통해서 태그를 전달하고,

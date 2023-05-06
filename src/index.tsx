@@ -3,16 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-import { ApiProvider } from '@reduxjs/toolkit/query/react';
-import { apiSlice } from './features/api/apiSlice';
+// when you only want to RTK-Query
+// import { ApiProvider } from '@reduxjs/toolkit/query/react';
+// import { apiSlice } from './redux/apiSlice';
+
+// when you only want to RTK-Query with Redux-Toolkits
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ApiProvider api={apiSlice}>
+    {/* <ApiProvider api={apiSlice}> */}
+    <Provider store={store}>
       <App />
-    </ApiProvider>
+    </Provider>
+    {/* </ApiProvider> */}
   </React.StrictMode>
 );

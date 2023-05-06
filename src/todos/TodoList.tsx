@@ -4,7 +4,7 @@ import {
   useDeleteTodoMutation,
   useGetTodosQuery,
   useUpdateTodoMutation,
-} from '../api/apiSlice';
+} from '../redux/endpoints/todo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
 
