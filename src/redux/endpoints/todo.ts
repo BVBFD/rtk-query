@@ -75,6 +75,8 @@ const injectedRtkApi = apiSlice.injectEndpoints({
       transformErrorResponse: transformErrorResponseCallback,
     }),
   }),
+  // RTK Query에서 overrideExisting은 캐시(cache)에 저장된 데이터를 무시하고,
+  // API에서 반환한 새로운 데이터를 사용하도록 강제하는 옵션입니다.
   overrideExisting: false,
 });
 

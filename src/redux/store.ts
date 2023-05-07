@@ -12,6 +12,7 @@ import {
 } from 'redux-persist';
 import { apiSlice } from './apiSlice';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import userRedercer from './slices/userSlice';
 
 const persistConfig = {
   key: 'root',
@@ -22,6 +23,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
+  user: userRedercer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
