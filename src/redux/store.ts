@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import storage from 'redux-persist/es/storage';
+import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
   persistReducer,
@@ -19,7 +19,9 @@ const persistConfig = {
   version: 1,
   storage,
   blacklist: [],
-  whitelist: [],
+  whitelist: ['user'],
+  // whitelist 에 persist하고 싶은 slice 값을 넣어서 localStorage에 저장되게 한다.
+  // 만약 blacklist, whitelist 정의하지 않으면 default로 자동으로 localStorage에 저장되어 persist 기능을 수행하게 됨.
 };
 
 const rootReducer = combineReducers({

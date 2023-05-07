@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useAddTodoMutation,
   useDeleteTodoMutation,
@@ -7,6 +7,10 @@ import {
 } from '../redux/endpoints/todo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
+import { loginReduce, logoutReduce } from '../redux/slices/userSlice';
+import { Link } from 'react-router-dom';
 
 interface ErrorType {
   status: number;
@@ -15,6 +19,12 @@ interface ErrorType {
 }
 
 const TodoList = () => {
+  const user = useSelector((state: RootState) => state.user);
+  // 전역 state 값이 저장된 값 불러올 때!!
+  const dispatch = useDispatch();
+  // 항상 dispatch(action(payload)) 기억할 것!!
+  console.log(user);
+
   const [newTodo, setNewTodo] = useState<string>('');
   const {
     data: todos,
@@ -88,8 +98,24 @@ const TodoList = () => {
     </form>
   );
 
+  useEffect(() => {
+    dispatch(
+      loginReduce({
+        userId: '1',
+        profilePic: 'User Picture',
+        editable: false,
+        email: 'User Email',
+      })
+    );
+
+    // return () => {
+    //   dispatch(logoutReduce());
+    // };
+  }, []);
+
   return (
     <main>
+      <Link to={'/'}>Home</Link>
       <h1>Todo List</h1>
       {newItemSection}
       {content}
