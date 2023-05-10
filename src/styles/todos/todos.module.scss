@@ -1,0 +1,21 @@
+.todosMain {
+  margin: auto;
+  max-width: 600px;
+
+  input[type='text'],
+  button {
+    font: inherit;
+  }
+
+  button {
+    min-width: 50px;
+    min-height: 50px;
+    border: 1px solid #333;
+    border-radius: 10%;
+    cursor: pointer;
+  }
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+}

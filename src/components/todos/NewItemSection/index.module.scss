@@ -1,0 +1,36 @@
+.form {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #333;
+  margin-bottom: 1rem;
+
+  label {
+    position: absolute;
+    left: -10000px;
+  }
+
+  .newTodo {
+    flex: 10;
+    margin-right: 1rem;
+
+    input[type='text'] {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: 0.5px solid #333;
+    }
+  }
+
+  .submitBtn {
+    flex: 1;
+    background-color: gray;
+    color: #fff;
+
+    &:focus,
+    &:hover {
+      background-color: limegreen;
+    }
+  }
+}
