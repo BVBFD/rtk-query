@@ -28,6 +28,12 @@
     background-color: gray;
     color: #fff;
 
+    svg {
+      width: 28px;
+      height: 28px;
+      margin: auto;
+    }
+
     &:focus,
     &:hover {
       background-color: limegreen;

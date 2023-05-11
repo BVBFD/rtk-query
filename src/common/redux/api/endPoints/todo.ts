@@ -16,7 +16,32 @@ const injectedRtkApi = apiSlice.injectEndpoints({
       },
       providesTags: ['Todos'],
     }),
+
+    addTodo: builder.mutation<TodosType, TodosType>({
+      query: (todo) => ({ url: '/todos', method: 'POST', body: todo }),
+      invalidatesTags: ['Todos'],
+    }),
+
+    updateTodo: builder.mutation<TodosType, TodosType>({
+      query: (todo) => ({ url: `/todos/${todo.id}`, method: 'PUT', body: todo }),
+      invalidatesTags: ['Todos'],
+    }),
+
+    deleteTodo: builder.mutation<TodosType, { id: number }>({
+      query: ({ id }) => ({
+        url: `/todos/${id}`,
+        method: 'DELETE',
+        body: id,
+      }),
+      invalidatesTags: ['Todos'],
+    }),
   }),
 });
 
-export const { useGetToDosQuery, useLazyGetToDosQuery } = injectedRtkApi;
+export const {
+  useGetToDosQuery,
+  useLazyGetToDosQuery,
+  useAddTodoMutation,
+  useUpdateTodoMutation,
+  useDeleteTodoMutation,
+} = injectedRtkApi;

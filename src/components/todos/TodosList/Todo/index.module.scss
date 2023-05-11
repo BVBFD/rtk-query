@@ -21,6 +21,12 @@
     background-color: #fff;
     color: mediumvioletred;
 
+    svg {
+      width: 28px;
+      height: 28px;
+      margin: auto;
+    }
+
     &:focus,
     &:hover {
       filter: brightness(120%);

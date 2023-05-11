@@ -15,7 +15,7 @@ interface TodosListType {
 const TodosList = ({ todos }: TodosListType): JSX.Element => {
   return (
     <div>
-      {todos?.map((todo) => (
+      {(todos as Array<TodosType>).map((todo) => (
         <Todo key={todo.id} todo={todo} />
       ))}
     </div>
